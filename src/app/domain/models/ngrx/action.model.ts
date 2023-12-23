@@ -1,6 +1,10 @@
 /**
- * Interface for NGRX Actions: describe 
- * the action that will be dispatched in 
+ * @interface Action
+ * Interface for NGRX Actions
+ * 
+ * @description
+ * describe the action 
+ * that will be dispatched in 
  * you application
  * 
  * @example
