@@ -41,9 +41,10 @@ describe(LoginComponent.name, () => {
     const email = 'test@';
     const password = 'test';
 
-    const submitBtn = fixture.debugElement.nativeElement.querySelector('#form-button');
-    const inputEmail = fixture.debugElement.nativeElement.querySelector('#email');
-    const inputPassword = fixture.debugElement.nativeElement.querySelector('#password');
+    const submitBtn = fixture.debugElement.nativeElement.querySelector('[type="submit"]');
+
+    const inputEmail =  fixture.debugElement.nativeElement.querySelector('[name="email"]');
+    const inputPassword = fixture.debugElement.nativeElement.querySelector('[name="password"]');
 
     inputEmail.value = email;
     inputPassword.value = password;
@@ -55,5 +56,11 @@ describe(LoginComponent.name, () => {
     submitBtn.click();
     
     expect(component.onSubmit).toHaveBeenCalledOnceWith(email, password);
+  });
+
+  it(`#Should create the login form when initialized`, () => {
+    fixture.detectChanges();
+
+    expect(component.loginForm.value).toEqual({ email: '', password: '' });
   });
 });
