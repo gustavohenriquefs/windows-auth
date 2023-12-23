@@ -4,10 +4,11 @@
  * you application
  * 
  * @example
- * content_copy
+ * ```typescript
  *  {
  *    type: '[Auth API] Login Success'
  *  }
+ * ```
  */
 interface Action {
   type: string;
