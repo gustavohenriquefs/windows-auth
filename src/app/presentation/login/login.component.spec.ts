@@ -36,4 +36,24 @@ describe(LoginComponent.name, () => {
 
     expect(component.onSubmit).toHaveBeenCalledOnceWith(email, password);
   });
+
+  it(`(D) #form-button should call the function: ${LoginComponent.prototype.onSubmit.name} `, () => {
+    const email = 'test@';
+    const password = 'test';
+
+    const submitBtn = fixture.debugElement.nativeElement.querySelector('#form-button');
+    const inputEmail = fixture.debugElement.nativeElement.querySelector('#email');
+    const inputPassword = fixture.debugElement.nativeElement.querySelector('#password');
+
+    inputEmail.value = email;
+    inputPassword.value = password;
+
+    const funName: keyof LoginComponent = LoginComponent.prototype.onSubmit.name as keyof LoginComponent;
+
+    spyOn(component, funName as never).and.callThrough();
+    
+    submitBtn.click();
+    
+    expect(component.onSubmit).toHaveBeenCalledOnceWith(email, password);
+  });
 });
