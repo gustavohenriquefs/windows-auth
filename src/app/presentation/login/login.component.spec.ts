@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 import { StoreModule } from '@ngrx/store';
-import { loginReducer } from '../../store/login-page.reducer';
+import { loginReducer } from '../../store/login-page/login-page.reducer';
 
 describe(LoginComponent.name, () => {
   let component!: LoginComponent;

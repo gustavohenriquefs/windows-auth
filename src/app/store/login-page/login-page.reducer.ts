@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { login } from './login-page.actions';
-import { LoginModel } from './login';
+import { login, loginWindows } from './login-page.actions';
+import { LoginModel } from '../models/login';
 
 export const initialLoginState: LoginModel = {
   email: '',
@@ -15,4 +15,10 @@ export const loginReducer = createReducer(
   on(login, (state) => (
     { email: state.email, password: state.password }
   )),
+  on(loginWindows, windowsLogin),
 );
+
+function windowsLogin(state: any) {
+  console.log('loginWindows');
+  return ({ email: state.email, password: state.password });
+}
