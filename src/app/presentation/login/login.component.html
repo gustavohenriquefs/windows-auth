@@ -1,25 +1,35 @@
+
 <section class="login">
+    <img class="bg-img bg-img-1" src="../../../assets/images/img-bg-1.svg">
+    <img class="bg-img bg-img-2" src="../../../assets/images/img-bg-2.svg">
+    <img class="bg-img bg-img-3" src="../../../assets/images/img-bg-3.svg">
+    <img class="bg-img bg-img-4" src="../../../assets/images/img-bg-4.svg">
+    
     <div class="login__form-container">
         
-        <form class="login__form">
-            <h1 class="login__form-title">Login</h1>
+        <form class="login__form" [formGroup]="loginForm">
+            <h1 class="form__form-title">Login</h1>
 
-            <div class="form__input">
+            <div class="form__control">
                 <label 
                     class="input-label" 
                     for="email"
-                >Email</label>
+                >
+                    Email
+                </label>
                 
                 <input 
-                    class="input-input" 
+                    class="control__input" 
                     type="email" 
                     name="email" 
                     id="email" 
+                    autocomplete="username"
+                    formControlName="email"
                     placeholder="Email" 
                     required>
             </div>
             
-            <div class="form__input">
+            <div class="form__control">
                 <label 
                     class="input-label" 
                     for="password"
@@ -28,17 +38,32 @@
                 </label>
 
                 <input 
-                    class="input-input" 
+                    class="control__input" 
                     type="password" 
                     name="password" 
                     id="password" 
+                    autocomplete="current-password"
+                    formControlName="password"
                     placeholder="Password" 
                     required>
             </div>
             
-            <div class="form__input">
-                <button class="input-button" type="submit">
+            <div class="form__form-btns">
+                <button class="form__form-btn" type="submit">
                     Login
+                </button>
+            </div>
+
+            <span class="form__txt-continue">
+                or continue with
+            </span>
+
+            <div class="form__form-btns">
+                <button class="form__form-float-btn" type="button" (click)="windowsAuth()">
+                    <fa-icon 
+                        [icon]="faWindows"
+                        class="form-float-btn__icon"    
+                    ></fa-icon>
                 </button>
             </div>
         </form>
