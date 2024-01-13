@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { LoginModel } from "../models/login";
+import { UserModel } from "../../domain/models/user.model";
 
 export const login = createAction(
   '[Login Page] Login',
@@ -7,12 +8,11 @@ export const login = createAction(
 );
 
 export const loginWindows = createAction(
-  '[Login Page] Login Windows',
-  props<LoginModel>()
+  '[Login Page] Login Windows'
 );
 
 
 export const loginSuccess = createAction(
   '[Login Page] Login Success',
-  props<{ login: LoginModel }>()
+  props<UserModel>()
 );

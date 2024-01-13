@@ -1,12 +1,12 @@
-import { Component } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { Observable } from "rxjs"; // Import the Observable module from the rxjs package
-import { LoginModel } from "../../store/models/login";
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { loginWindows, login } from "../../store/login-page/login-page.actions";
-import { IconDefinition, faWindows } from '@fortawesome/free-brands-svg-icons';
+import { Component } from "@angular/core";
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { IconDefinition, faWindows } from '@fortawesome/free-brands-svg-icons';
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { login, loginWindows } from "../../store/login-page/login-page.actions";
+import { LoginModel } from "../../store/models/login";
 
 @Component({
   selector: 'app-login',
@@ -42,7 +42,7 @@ export class LoginComponent {
   }
 
   public windowsAuth() {
-    this.store.dispatch(loginWindows({ email: '', password: '' }));
+    this.store.dispatch(loginWindows());
   }
   
   public onSubmit(email: string, password: string) {

@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
-import { mergeMap, map, catchError, EMPTY, exhaustMap, pipe } from "rxjs";
-import { LoginModel } from "../models/login";
-import { login, loginSuccess, loginWindows } from "./login-page.actions";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { UserRepository } from "../../domain/repositories/user.repository";
+import { EMPTY, catchError, exhaustMap, map, mergeMap, take } from "rxjs";
 import { UserImplementationRepository } from "../../data/repositories/user/user-implementation.repository";
+import { login, loginSuccess, loginWindows } from "./login-page.actions";
+import { UserModel } from "../../domain/models/user.model";
 
 @Injectable()
 export class LoginPageStore {
@@ -12,21 +11,31 @@ export class LoginPageStore {
     ofType(login),
     exhaustMap((action) => this.userRepository.login(action)
       .pipe(
-        map((login: LoginModel) => loginSuccess({ login })),
-        catchError(() => EMPTY)
+        map((user: UserModel) => loginSuccess(user)),
+        catchError(() => EMPTY),
+        take(1),
       ))  
   ));
 
   loginWindows$ = createEffect(() => this.actions$.pipe(
     ofType(loginWindows),
-    exhaustMap(() => {
-        console.log('loginWindows');
-        return this.userRepository.loginWindows()
-      }),
-      map((login: LoginModel) => loginWindows(login)),
-      catchError(() => EMPTY)
-    )  
-  );
+    mergeMap(() => {
+      return this.userRepository.loginWindows().pipe(
+        take(1),
+        map((user: UserModel) => loginSuccess(user)),
+        catchError(() => EMPTY)
+      );
+    })
+  ));
+
+  loginSuccess$ = createEffect(() => this.actions$.pipe(
+    ofType(loginSuccess),
+    map((action) => {
+      console.log(action);
+      return action;
+    })
+  ), { dispatch: false });
+  
 
   constructor(
     private actions$: Actions,
