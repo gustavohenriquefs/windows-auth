@@ -6,4 +6,9 @@ export const routes: Routes = [
         path: 'login', 
         component: LoginComponent 
     },
+    {
+        path: 'signin-oidc',
+        redirectTo: 'login',
+        pathMatch: 'full'
+    }
 ];
