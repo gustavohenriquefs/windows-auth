@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
-import { UserRepository } from '../../../domain/repositories/user.repository';
-import { Observable } from 'rxjs';
-import { UserModel } from '../../../domain/models/user.model';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { MsalService } from '@azure/msal-angular';
+import { AuthenticationResult } from '@azure/msal-browser';
+import { Observable, map } from 'rxjs';
 import * as uuid from 'uuid';
+import { UserModel } from '../../../domain/models/user.model';
+import { UserRepository } from '../../../domain/repositories/user.repository';
 
 const BASE_URL = 'https://localhost:44310';
 
@@ -12,8 +14,22 @@ const BASE_URL = 'https://localhost:44310';
 })
 export class UserImplementationRepository extends UserRepository {
   
-  constructor(private http: HttpClient) {
+  private app: any;
+
+  constructor(private http: HttpClient, private msalService: MsalService) {
     super();
+
+    this.msalService.initialize();
+  }
+  
+  logout() {
+    this.app.logout();
+  }
+  
+  getToken() {
+    return this.app.acquireTokenSilent({
+      scopes: ['your-api-scope'],
+    });
   }
   
   override login(params: { email: string; password: string; }): Observable<UserModel> {
@@ -34,8 +50,21 @@ export class UserImplementationRepository extends UserRepository {
   override getUserProfile(): Observable<UserModel> {
     throw new Error('Method not implemented.');
   }
-
+  
   override loginWindows(): Observable<UserModel> {
-    return this.http.post<UserModel>(`${BASE_URL}/api/WindowsUsers/Login`, null);
+    const _windowsUserData: Observable<AuthenticationResult>  = this.msalService.loginPopup();
+
+    return _windowsUserData.pipe(
+      map((response: AuthenticationResult) => {
+        const result: UserModel = {
+          id: uuid.v4(), 
+          name: 'test',
+          email: response.account.username,
+          token: response.accessToken
+        };
+        
+        return result;
+      }
+    ));
   }
-;}
+}
