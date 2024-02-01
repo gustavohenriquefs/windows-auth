@@ -33,6 +33,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@ngrx/effects": "^17.0.1",
     "@ngrx/store": "^17.0.1",
+    "@ngrx/store-devtools": "^17.1.0",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -47,13 +48,13 @@
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
     "@types/uuid": "^9.0.7",
+    "cypress": "^13.6.4",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.2.2",
-    "cypress": "latest"
+    "typescript": "~5.2.2"
   }
 }
