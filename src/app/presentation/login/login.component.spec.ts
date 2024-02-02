@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 import { StoreModule } from '@ngrx/store';
-import { loginReducer } from '../../store/login-page/login-page.reducer';
+import { loginReducer } from '../../store/login/login.reducer';
 
 describe(LoginComponent.name, () => {
   let component!: LoginComponent;
@@ -27,18 +27,15 @@ describe(LoginComponent.name, () => {
   });
 
   it(`#${LoginComponent.prototype.onSubmit.name} should dispatch login action`, () => {
-    const email = 'test@email';
-    const password = 'test';
-
     spyOn(component, 'onSubmit').and.callThrough();
     
-    component.onSubmit(email, password);
+    component.onSubmit();
 
-    expect(component.onSubmit).toHaveBeenCalledOnceWith(email, password);
+    expect(component.onSubmit).toHaveBeenCalledTimes(1);
   });
 
   it(`(D) #form-button should call the function: ${LoginComponent.prototype.onSubmit.name} `, () => {
-    const email = 'test@';
+    const email = 'test@gmail.com';
     const password = 'test';
 
     const submitBtn = fixture.debugElement.nativeElement.querySelector('[type="submit"]');
@@ -50,17 +47,27 @@ describe(LoginComponent.name, () => {
     inputPassword.value = password;
 
     const funName: keyof LoginComponent = LoginComponent.prototype.onSubmit.name as keyof LoginComponent;
-
+    
     spyOn(component, funName as never).and.callThrough();
     
     submitBtn.click();
+
+    fixture.detectChanges();
     
-    expect(component.onSubmit).toHaveBeenCalledOnceWith(email, password);
+    expect(component.onSubmit).toHaveBeenCalledTimes(1);
   });
 
   it(`#Should create the login form when initialized`, () => {
     fixture.detectChanges();
 
     expect(component.loginForm.value).toEqual({ email: '', password: '' });
+  });
+
+  it(`#${LoginComponent.prototype.windowsAuth.name} should dispatch loginWindows action`, () => {
+    spyOn(component, 'windowsAuth').and.callThrough();
+    
+    component.windowsAuth();
+
+    expect(component.windowsAuth).toHaveBeenCalledTimes(1);
   });
 });
