@@ -5,8 +5,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { IconDefinition, faWindows } from '@fortawesome/free-brands-svg-icons';
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { login, loginWindows } from "../../store/login-page/login-page.actions";
-import { LoginModel } from "../../store/models/login";
+import { UserModel } from "../../domain/models/user.model";
+import { UserActions } from "../../store/login/login.actions";
 
 @Component({
   selector: 'app-login',
@@ -21,16 +21,15 @@ import { LoginModel } from "../../store/models/login";
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  login$: Observable<LoginModel>;
+  login$: Observable<UserModel>;
   loginForm!: FormGroup;
   faWindows: IconDefinition = faWindows;
 
   constructor(
-    private store: Store<{ login: LoginModel }>,
+    private store: Store<{ login: UserModel }>,
     private fb: FormBuilder
   ) {
     this.login$ = store.select('login');
-
     this.createForm();
   }
 
@@ -42,10 +41,12 @@ export class LoginComponent {
   }
 
   public windowsAuth() {
-    this.store.dispatch(loginWindows());
+    this.store.dispatch(UserActions.userWindowsLogin());
   }
   
-  public onSubmit(email: string, password: string) {
-    this.store.dispatch(login({ email, password }));
+  public onSubmit() {
+    const { email, password } = this.loginForm.value;
+
+    // this.store.dispatch(UserActions.userLogin({ login: { email, password } }));
   }
 }
