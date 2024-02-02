@@ -1,9 +1,9 @@
-import { Mapper } from "../../../base/utils/mapper";
+;import { Mapper } from "../../../base/utils/mapper";
 import { UserModel } from "../../../domain/models/user.model";
 import { UserEntity } from "../user/entities/user-entity";
 
 export class UserImplementationMapper extends Mapper<UserEntity, UserModel> {
-    mapFrom(param: UserEntity) {
+    mapFrom(param: UserEntity): UserModel {
         return {
             id: param.id,
             name: param.name,
@@ -14,14 +14,14 @@ export class UserImplementationMapper extends Mapper<UserEntity, UserModel> {
         };
     }
     
-    mapTo(param: UserModel) {
+    mapTo(param: UserModel): UserEntity {
         return {
             id: param.id,
             name: param.name,
             email: param.email,
-            password: param.password,
-            passwordConfirmation: param.passwordConfirmation,
-            token: param.token
+            password: param.password ?? '',
+            passwordConfirmation: param.passwordConfirmation ?? '',
+            token: param.token ?? ''
         };
     }
 }
