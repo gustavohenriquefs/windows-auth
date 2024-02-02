@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MsalService } from '@azure/msal-angular';
 import { AuthenticationResult } from '@azure/msal-browser';
 import { Observable, map } from 'rxjs';
 import * as uuid from 'uuid';
 import { UserModel } from '../../../domain/models/user.model';
 import { UserRepository } from '../../../domain/repositories/user.repository';
+import { MsalService } from '@azure/msal-angular';
 
 const BASE_URL = 'https://localhost:44310';
 
@@ -28,7 +28,7 @@ export class UserImplementationRepository extends UserRepository {
   
   getToken() {
     return this.app.acquireTokenSilent({
-      scopes: ['your-api-scope'],
+      scopes: ['api-scope'],
     });
   }
   
