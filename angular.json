@@ -106,7 +106,14 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "codeCoverageExclude": [
+              "**/mock/**",
+              "*.repository.ts",
+              "*.mapper.ts",
+              "*.model.ts",
+              "*.config.ts"
+            ]
           }
         },
         "cypress-run": {
