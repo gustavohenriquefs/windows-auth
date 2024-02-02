@@ -25,3 +25,32 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Commits
+
+### Template:
+
+```bash
+  git commit -m ":<<action>>: commit initial"
+```
+
+### Actions options
+
+* init : initial commit
+* feat : new feature
+* fix : bug fix
+* docs : changes to documentation
+* test : adding or refactoring tests
+* build : changes that affect the build system or external dependencies
+* rerf : performance improvements
+* style : formatting, missing semi colons, etc; no code change
+* chore : tooling changes
+* ci : changes to our CI configuration files and scripts
+* refactor : refactoring production code
+
+### Examples
+  
+  ```bash
+    git commit -m ":feat: add registration page"
+    git commit -m ":feat: integrate login page"
+  ```
