@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './presentation/login/login.component';
+import { HomeComponent } from './presentation/home/home.component';
 
 export const routes: Routes = [
     { 
@@ -8,7 +9,6 @@ export const routes: Routes = [
     },
     {
         path: 'signin-oidc',
-        redirectTo: 'login',
-        pathMatch: 'full'
+        component: HomeComponent
     }
 ];
