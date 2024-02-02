@@ -32,14 +32,21 @@ $white: #f5f8fb;
 
 .login {
     display: flex;
+    position: relative;
 
     z-index: 2;
     
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
+    overflow: hidden;
 
     background: rgb(89, 146, 187);
     background: linear-gradient(288deg, #0F0C29 0%, #302B63 50%, #24243E 100%);
+
+    img {
+        overflow: hidden;
+        display: block;
+    }
 
     &__form-container {
         position: absolute;
