@@ -1,71 +1,23 @@
-<!-- contact-form.component.html -->
-
-<section class="contact-form">
-  <div class="container">
-    <div class="section-title">Contact</div>
-    <div class="main-content">
-      <div class="left-content">
-        <div class="content-title">Let us know how we can help</div>
-        <div class="content-description">
-          We’re here to help and answer any question you might have. We look
-          forward to hearing from you! Please fill out the form or use the
-          contact information below.
-        </div>
-        <ul class="contact-list">
-          <li>
-            <div class="icon"><!-- Icon SVG Code --></div>
-            <p>Support&#64;example.com</p>
-          </li>
-          <li>
-            <div class="icon"><!-- Icon SVG Code --></div>
-            <p>+1 (555) 000-000</p>
-          </li>
-          <li>
-            <div class="icon"><!-- Icon SVG Code --></div>
-            <p>Mountain View, California, United State.</p>
-          </li>
-        </ul>
+<main class="tabs">
+  <header class="tabs__header">
+    @for (item of dataHomeTabs.tabItems; track $index) {
+      <div class="tabs__tab" [class.selected]="dataHomeTabs.selectedTab === item.name">
+        <button (click)="selectTab(item.name)" class="tab__button" [class.active]="dataHomeTabs.selectedTab === item.name">
+          <fa-icon
+            class="tab__icon"
+            [icon]="item.icon"
+          ></fa-icon>
+          <span class="tab__name">{{ item.name }}</span>
+        </button>
       </div>
-      <div class="right-content">
-        <form (submit)="null">
-          <label for="fullName" class="form-label">Full name</label>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            required
-            class="form-input"
-          />
-
-          <label for="email" class="form-label">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            class="form-input"
-          />
-
-          <label for="company" class="form-label">Company</label>
-          <input
-            type="text"
-            id="company"
-            name="company"
-            required
-            class="form-input"
-          />
-
-          <label for="message" class="form-label">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            required
-            class="form-textarea"
-          ></textarea>
-
-          <button type="submit" class="form-button">Submit</button>
-        </form>
+    }
+  </header>
+  
+  @for (item of dataHomeTabs.tabItems; track $index) {
+    @if(dataHomeTabs.selectedTab !== item.name) { 
+      <div class="tabs__content">
+        <p class="content__text">This is <b>{{ item.name }}</b> Tab</p>
       </div>
-    </div>
-  </div>
-</section>
+    }
+  }
+</main>
