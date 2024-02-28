@@ -10,5 +10,15 @@ export const routes: Routes = [
     {
         path: 'signin-oidc',
         component: HomeComponent
+    },
+    {
+        path: '',
+        redirectTo: '/login',
+        pathMatch: 'full'
+    },
+    {
+        path: '**',
+        redirectTo: '/login',
+        pathMatch: 'full'
     }
 ];
