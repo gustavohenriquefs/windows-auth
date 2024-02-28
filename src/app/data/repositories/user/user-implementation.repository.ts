@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthenticationResult } from '@azure/msal-browser';
-import { Observable, map } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import * as uuid from 'uuid';
 import { UserModel } from '../../../domain/models/user.model';
 import { UserRepository } from '../../../domain/repositories/user.repository';
 import { MsalService } from '@azure/msal-angular';
+import { Permission } from '../../../domain/models/permisssion.model';
+import { getUserPermissions	 } from '../../../../assets/mock/apiRoutes';
 
 const BASE_URL = 'https://localhost:44310';
 
@@ -13,6 +15,13 @@ const BASE_URL = 'https://localhost:44310';
   providedIn: 'root'
 })
 export class UserImplementationRepository extends UserRepository {
+  override getUserRequestsPermissions(): Observable<Permission[]> {
+    return of(
+      getUserPermissions('')
+        .filter((permission: Permission) => 
+          permission.resource.match(/\/requests\/\d+/)
+      ));
+  }
   
   private app: any;
 
